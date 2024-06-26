@@ -14,7 +14,7 @@ def _count_mask_differences(mask1, mask2):
     n_diff = n_total - n_same
     return n_diff
 
-class MWA(Algorithm):
+class BayesianPrunerUnstructured(Algorithm):
     def __init__(
             self,
             train_size,
