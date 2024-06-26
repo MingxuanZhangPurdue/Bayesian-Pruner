@@ -49,7 +49,7 @@ from transformers.utils.versions import require_version
 
 
 # Will error if the minimal version of Transformers is not installed. Remove at your own risks.
-check_min_version("4.42.0.dev0")
+#check_min_version("4.42.0.dev0")
 
 logger = get_logger(__name__)
 
@@ -204,6 +204,12 @@ def parse_args():
 
     # experiment arguments
     parser.add_argument(
+        "--config",
+        type=str,
+        default=None,
+        help="Path to a json configuration file defining the experiment arguments.",
+    )
+    parser.add_argument(
         "--cache_dir",
         type=str,
         default="./cache",
@@ -211,6 +217,14 @@ def parse_args():
     )
 
     args = parser.parse_args()
+
+    # Load the configuration file if it exists
+    if args.config is not None:
+        print (f"Loading config file from {args.config}")
+        with open(args.config, "r") as f:
+            config = json.load(f)
+        for key, value in config.items():
+            setattr(args, key, value)
 
     # Sanity checks
     if args.dataset_name is None and args.train_dir is None and args.validation_dir is None:
