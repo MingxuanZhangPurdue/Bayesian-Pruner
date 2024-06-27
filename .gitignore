@@ -1,5 +1,7 @@
 # Ignore the ./cache folder
 /cache
+/data
+/output
 
 
 # Byte-compiled / optimized / DLL files
